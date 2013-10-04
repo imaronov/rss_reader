@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'HomeController@ShowWelcome');
+Route::get('index.php', 'HomeController@ShowWelcome');
 
 Route::Post('/', 'AccountController@login');
 
