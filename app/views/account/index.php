@@ -38,8 +38,7 @@ TITLE;
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="account/">Home</a></li>
-                <li><a href="#about">About</a></li>
+                <li><a href="#about">Manage</a></li>
                 <li><a href="account/logout.php">Logout</a></li>
             </ul>
         </div><!-- /.nav-collapse -->
@@ -58,53 +57,34 @@ TITLE;
                 <p>This is an example to show the potential of an offcanvas layout pattern in Bootstrap. Try some responsive-range viewport sizes to see it in action.</p>
             </div>
             <div class="row">
-                <div class="col-6 col-sm-6 col-lg-4">
-                    <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                    <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
-                </div><!--/span-->
-                <div class="col-6 col-sm-6 col-lg-4">
-                    <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                    <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
-                </div><!--/span-->
-                <div class="col-6 col-sm-6 col-lg-4">
-                    <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                    <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
-                </div><!--/span-->
-                <div class="col-6 col-sm-6 col-lg-4">
-                    <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                    <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
-                </div><!--/span-->
-                <div class="col-6 col-sm-6 col-lg-4">
-                    <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                    <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
-                </div><!--/span-->
-                <div class="col-6 col-sm-6 col-lg-4">
-                    <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                    <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
-                </div><!--/span-->
+
+
+                <?php
+                $items = $items[0];
+                foreach($items as $item) {
+                echo<<<ITEM
+                <div class="col-6 col-sm-6 col-lg-4" style="max-width:263px; min-width:263;">
+                    <h3>$item->title</h3>
+                    <p><!-- $item->description --></p>
+                    <p><a class="btn btn-default" href="$item->link">Go to article &raquo</a></p>
+                </div>
+ITEM;
+                }
+                ?>
+
+
             </div><!--/row-->
         </div><!--/span-->
 
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
             <div class="well sidebar-nav">
                 <ul class="nav">
-                    <li>Sidebar</li>
-                    <li class="active"><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
-                    <li>Sidebar</li>
-                    <li><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
-                    <li>Sidebar</li>
-                    <li><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
+                    <l>Feed List - <?php echo sizeof($feeds);?></l>
+                    <li><a><?php
+                            foreach($feeds as $feed){
+                                echo $feed->name;
+                            }
+                    ?></a></li>
                 </ul>
             </div><!--/.well -->
         </div><!--/span-->
@@ -113,7 +93,7 @@ TITLE;
     <hr>
 
     <footer>
-        <p>&copy; Company 2013</p>
+        <p>&copy; imaronov 2013</p>
     </footer>
 
 </div><!--/.container-->

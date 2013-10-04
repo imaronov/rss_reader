@@ -15,14 +15,10 @@ class AccountController extends BaseController {
         if(sizeof($user) > 0) {
             // login successful
             $user = $user[0];
+            // set session
             Session::put('user', $user);
-
-            // pass user data to the account view
-            return View::make('/account/index')
-                    ->with(array(
-                        'first_name' => Session::get('user')->first_name,
-                        'last_name' => Session::get('user')->last_name
-                ));
+            // redirect to account
+            return Redirect::to('/account');
         } else {
             // login not successful
             return View::make('index');
@@ -30,30 +26,41 @@ class AccountController extends BaseController {
     }
 
     public function logout() {
+        // destroy session
         Session::flush();
+        // redirect to home
         return Redirect::to('/');
     }
 
     public function home() {
-//        // check if user logged in
-//        if(Session::get('user')) {
-//            return View::make('/account/index')
-//                ->with(array(
-//                    'first_name' => Session::get('user')->first_name,
-//                    'last_name' => Session::get('user')->last_name,
-//                ));
-//        } else {
-//            return View::make('index');
-//        }
-
+        // checks if user is logged in
         if(Session::get('user')) {
+
+            $items = array();
+
+            // get all feeds
+            $feeds = DB::table('feeds')
+                ->join('feeds_users', 'feeds.id', '=', 'feeds_users.id')
+                ->where('feeds_users.users_id', '=', Session::get('user')->id)
+                ->get();
+
+            // get all items
+            for($i = 0; $i < sizeof($feeds); $i++) {
+                $items[$i] = DB::table('items')
+                    ->join('feeds', 'items.feeds_id', '=', 'feeds.id')
+                    ->get();
+            }
+
             return View::make('account/index')
                     ->with(array(
                     'first_name' => Session::get('user')->first_name,
                     'last_name' => Session::get('user')->last_name,
+                    'feeds' => $feeds,
+                    'items' => $items
                 ));
         }
         else {
+            // if user not logged in
             return View::make('index');
         }
     }
