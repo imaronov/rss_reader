@@ -58,6 +58,6 @@ class RssController extends BaseController {
 
     public function search() {
         // TODO: build search queries
-        
+
     }
 }

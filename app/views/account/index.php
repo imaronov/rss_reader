@@ -23,6 +23,13 @@ TITLE;
     <script src="../bootstrap/assets/js/html5shiv.js"></script>
     <script src="../bootstrap/assets/js/respond.min.js"></script>
     <![endif]-->
+    <script type="text/javascript">
+        function addFeed() {
+            var url_name = document.getElementById('addUrlName').value;
+
+            alert(url_name);
+        }
+    </script>
 </head>
 
 <body>
@@ -100,9 +107,9 @@ ITEM;
                 <!-- Add Feeds input bar
                     TODO: .ajax call to add feed -->
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="url">
+                    <input id="addUrlName" type="text" class="form-control" placeholder="url">
                     <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">Add</button>
+                    <button class="btn btn-default" type="button" onclick="addFeed()">Add</button>
                     </span>
                 </div>
 
