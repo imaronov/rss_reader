@@ -41,6 +41,16 @@ TITLE;
                 <li><a href="#about">Manage</a></li>
                 <li><a href="account/logout.php">Logout</a></li>
             </ul>
+
+            <!-- search form
+                TODO: .ajax call to for search query -->
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" style="width:320px;" placeholder="RSS Feed">
+                </div>
+                <button type="submit" class="btn btn-default">Search</button>
+            </form>
+
         </div><!-- /.nav-collapse -->
     </div><!-- /.container -->
 </div><!-- /.navbar -->
@@ -54,7 +64,8 @@ TITLE;
             </p>
             <div class="jumbotron">
                 <h1>Welcome back!</h1>
-                <p>This is an example to show the potential of an offcanvas layout pattern in Bootstrap. Try some responsive-range viewport sizes to see it in action.</p>
+                <p>Feeds: <?php echo $count['feeds'] ?></p>
+                <p>Stories: <?php echo $count['items'] ?></p>
             </div>
             <div class="row">
 
@@ -79,6 +90,16 @@ ITEM;
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
             <div class="well sidebar-nav">
                 <ul class="nav">
+
+                <!-- Add Feeds input bar
+                    TODO: .ajax call to add feed -->
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="url">
+                    <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">Add</button>
+                    </span>
+                </div>
+
                     <l>Feed List - <?php echo sizeof($feeds);?></l>
                     <li><a><?php
                             foreach($feeds as $feed){
