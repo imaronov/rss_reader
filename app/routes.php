@@ -10,7 +10,11 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-
+/*
+ * TODO: add filters to determine what pages the user needs to be logged in to view instead of through logic in Controllers
+ *
+ * TODO: figure out to catch pages that don't exist
+ */
 Route::get('/', 'HomeController@ShowWelcome');
 
 Route::Post('/login.php', 'AccountController@login');

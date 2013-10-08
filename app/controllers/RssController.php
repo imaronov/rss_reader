@@ -30,6 +30,9 @@ class RssController extends BaseController {
             // parse items
             $itemCount = sizeof($xml->channel->item);
             for($i = 0; $i < $itemCount; $i++) {
+                // TODO: filter and clean-up the description to remove any unwanted tags and images
+
+
                 $item = Item::create(array(
                     'feeds_id' => $feed->id,
                     'title' => $xml->channel->item[$i]->title,
@@ -49,11 +52,12 @@ class RssController extends BaseController {
 
 
         } catch(ErrorException $ee){
-            //if invalid feed
-
-            return "invalid";
-
-            //redirect to previous page
+            App:abort('Invalid feed.');
         }
+    }
+
+    public function search() {
+        // TODO: build search queries
+        
     }
 }
