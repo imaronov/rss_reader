@@ -71,15 +71,21 @@ TITLE;
 
 
                 <?php
-                $items = $items[0];
-                foreach($items as $item) {
-                echo<<<ITEM
-                <div class="col-6 col-sm-6 col-lg-4" style="max-width:263px; min-width:263;">
-                    <h3>$item->title</h3>
-                    <p><!-- $item->description --></p>
-                    <p><a class="btn btn-default" href="$item->link">Go to article &raquo</a></p>
-                </div>
+                // check if user has any items
+                if($count['items'] > 0){
+                    $items = $items[0];
+                    foreach($items as $item) {
+                    echo<<<ITEM
+                    <div class="col-6 col-sm-6 col-lg-4" style="max-width:263px; min-width:263;">
+                        <h3>$item->title</h3>
+                        <p><!-- $item->description --></p>
+                        <p><a class="btn btn-default" href="$item->link">Go to article &raquo</a></p>
+                    </div>
 ITEM;
+                    }
+                } else {
+                    // if the user does not have items
+                    // TODO: make notice for no items
                 }
                 ?>
 
@@ -100,12 +106,22 @@ ITEM;
                     </span>
                 </div>
 
-                    <l>Feed List - <?php echo sizeof($feeds);?></l>
+                    <?php
+                        // if user has feeds
+                        if($count['feeds'] > 0) {
+                    ?>
+                    <li>Feed List - <?php echo sizeof($feeds);?></li>
                     <li><a><?php
                             foreach($feeds as $feed){
                                 echo $feed->name;
                             }
                     ?></a></li>
+                    <?php
+                        } else{
+                            // if user doesnt have feeds
+                            // TODO: make notice for no feeds
+                        }
+                    ?>
                 </ul>
             </div><!--/.well -->
         </div><!--/span-->
@@ -129,17 +145,3 @@ ITEM;
 <script src="offcanvas.js"></script>
 </body>
 </html>
-
-
-<!--
-
-<!DOCTYPE HTML>
-<html>
-<head>
-
-</head>
-<body>
-    <a href="account/logout.php">logout</a>
-</body>
-</html>
--->

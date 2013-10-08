@@ -27,7 +27,7 @@
 
         <div class="navbar-collapse collapse">
 
-            <form class="navbar-form navbar-right" method="post">
+            <form class="navbar-form navbar-right" method="post" action="login.php">
                 <div class="form-group">
                     <input type="text" placeholder="Email" class="form-control" name="email">
                 </div>

@@ -13,7 +13,7 @@
 
 Route::get('/', 'HomeController@ShowWelcome');
 
-Route::Post('/', 'AccountController@login');
+Route::Post('/login.php', 'AccountController@login');
 
 Route::get('/register.php', function() {
     return View::make('register');
