@@ -51,12 +51,29 @@ class AccountController extends BaseController {
                     ->get();
             }
 
+            // get counts
+            // item count
+            $count['items'] = DB::table('items')
+                            ->join('items_users', 'items.id', "=", 'items_users.items_id')
+                            ->where('items_users.users_id', "=", Session::get('user')->id)
+                            ->count();
+
+            // feed count
+            $count['feeds'] = DB::table('feeds')
+                            ->join('feeds_users', 'feeds.id', '=', 'feeds_users.feeds_id')
+                            ->where('feeds_users.users_id', '=', Session::get('user')->id)
+                            ->count();
+
+            //return $count['feeds'];
+
+
             return View::make('account/index')
                     ->with(array(
                     'first_name' => Session::get('user')->first_name,
                     'last_name' => Session::get('user')->last_name,
                     'feeds' => $feeds,
-                    'items' => $items
+                    'items' => $items,
+                    'count' => $count
                 ));
         }
         else {

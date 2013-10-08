@@ -34,7 +34,7 @@
                 <div class="form-group">
                     <input type="password" placeholder="Password" class="form-control" name="password">
                 </div>
-                <button type="submit" class="btn btn-success">Sign in</button>
+                <button type="submit" name="login" class="btn btn-success">Sign in</button>
             </form>
 
         </div><!--/.navbar-collapse -->
@@ -46,7 +46,18 @@
     <div class="container">
         <h1>RSS Reader</h1>
         <p>View your news and other media here.</p>
-        <p><a class="btn btn-primary btn-lg" href="register.php">Register &raquo;</a></p>
+
+        <!-- Registration form
+            TODO: registration form route-->
+        <form method="post" action="register.php" style="width:400px;">
+            <input type="text" placeholder="First Name" class="form-control" name="first_name">
+            <input type="text" placeholder="Last Name" class="form-control" name="last_name">
+            <input type="text" placeholder="Email" class="form-control" name="email">
+            <input type="password" placeholder="Password" class="form-control" name="password1">
+            <input type="password" placeholder="Retype Password" class="form-control" name="password2">
+            <p><button type="submit" name="register" class="btn btn-primary btn-lg">Register &raquo;</button></p>
+        </form>
+
     </div>
 </div>
 
