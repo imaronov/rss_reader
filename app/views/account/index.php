@@ -14,6 +14,7 @@ TITLE;
 
     <!-- Bootstrap core CSS -->
     <link href="../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="../bootstrap/assets/css/offcanvas.css" rel="stylesheet">
@@ -27,18 +28,32 @@ TITLE;
     <script type="text/javascript">
         function addFeed() {
             var url_name = document.getElementById('addUrlName').value;
-            // TODO: fix ajax call
 
             $.ajax({
-                type: "POST",
+                type: "GET",
                 url: "feed/add.php",
                 data: { url: url_name }
             }).done(function( ) {
-                alert( "Data Saved" );
+                // display success message
+                $('#addUrlName').val('');
+                $('#url_add_alert').removeClass().addClass('alert alert-success');
+                $('#url_add_icon').removeClass().addClass('glyphicon glyphicon-thumbs-up');
+                $('#url_add_message').text('Feed added')
+
+                // TODO: add feed to list
+
             }).fail(function() {
-                alert("fail");
+                // display error message
+                $('#addUrlName').val('');
+                $('#url_add_alert').removeClass().addClass('alert alert-danger');
+                $('#url_add_icon').removeClass().addClass('glyphicon glyphicon-thumbs-down');
+                $('#url_add_message').text('Invalid url')
             });
 
+        }
+
+        function hideAlert() {
+            $('#url_add_alert').removeClass().addClass('hidden');
         }
     </script>
 </head>
@@ -117,14 +132,18 @@ ITEM;
 
                 <!-- Add Feeds input bar
                     TODO: .ajax call to add feed -->
-                    <form method="get" action="feed/add.php">
-                        <div class="input-group">
-                            <input id="addUrlName" name="url" type="text" class="form-control" placeholder="url">
-                            <span class="input-group-btn">
-                            <button type="submit" class="btn btn-default">Add</button>
-                            </span>
-                        </div>
-                   </form>
+                    <div class="input-group">
+                        <input id="addUrlName" name="url" type="text" class="form-control" placeholder="url">
+                        <span class="input-group-btn">
+                        <button class="btn btn-default" onclick="addFeed()">Add</button>
+                        </span>
+                    </div>
+
+                    <div id="url_add_alert" class="hidden">
+                        <a class="close" data-dismiss="alert" onclick="hideAlert()">x</a>
+                        <span id="url_add_icon" class=""></span>
+                        <span id="url_add_message"></span>
+                    </div>
 
 
                     <?php

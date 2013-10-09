@@ -19,10 +19,6 @@ Route::get('/', 'HomeController@ShowWelcome');
 
 Route::Post('/login.php', 'AccountController@login');
 
-Route::get('/register.php', function() {
-    return View::make('register');
-});
-
 Route::post('/register.php', 'HomeController@register');
 
 Route::get('/account', 'AccountController@home');

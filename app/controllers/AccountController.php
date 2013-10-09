@@ -36,6 +36,10 @@ class AccountController extends BaseController {
         // checks if user is logged in
         if(Session::get('user')) {
 
+            if (!is_numeric(Input::get('feed_id'))) {
+                //return "no";
+            }
+
             $items = array();
 
             // get all feeds

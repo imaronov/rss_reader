@@ -9,6 +9,7 @@ class RssController extends BaseController {
 
         //gets url from user
         $url = Input::get('url');
+
         try{
             $xml = simplexml_load_file($url);
             //return Response::json(array($xml));
@@ -53,7 +54,7 @@ class RssController extends BaseController {
 
         } catch(ErrorException $ee){
             // if it is not a valid xml feed
-            return Redirect::to('/account');
+            App::abort('Invalid url.');
 
         }
     }
