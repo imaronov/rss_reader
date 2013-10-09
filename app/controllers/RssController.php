@@ -10,16 +10,21 @@ class RssController extends BaseController {
         //gets url from user
         $url = Input::get('url');
 
+//        return Response::json(array(
+//            'feed_name' => "test"
+//        ));
+
         try{
             $xml = simplexml_load_file($url);
             //return Response::json(array($xml));
 
             // parse feed
-              $feed = Feed::create(array(
+              $feed = new Feed(array(
                 'name' => $xml->channel->title,
                 'url' => $xml->channel->link,
                 'url_md5' => md5($xml->channel->link)
             ));
+            $feed->save();
 
             // connect feed to user
             Feeds_user::create(array(
@@ -50,7 +55,14 @@ class RssController extends BaseController {
                     'favorite' => 0
                 ));
             }
-            return Redirect::to('/account');
+
+            // return the feeds information
+            // TODO: fix, feed->name is not getting passed
+            return Response::json(array(
+                'feed_id' => $feed->id,
+                'feed_name' => $feed->name,
+                'feed_url' => $feed->url
+            ));
 
         } catch(ErrorException $ee){
             // if it is not a valid xml feed

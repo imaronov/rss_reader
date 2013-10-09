@@ -33,7 +33,8 @@ TITLE;
                 type: "GET",
                 url: "feed/add.php",
                 data: { url: url_name }
-            }).done(function( ) {
+            }).done(function( data ) {
+                    alert(data['feed_name']);
                 // display success message
                 $('#addUrlName').val('');
                 $('#url_add_alert').removeClass().addClass('alert alert-success');
@@ -41,7 +42,7 @@ TITLE;
                 $('#url_add_message').text('Feed added')
 
                 // TODO: add feed to list
-
+                $('feeds_list').append('<li><a>' + data['feed_name'] + '</a></li>');
             }).fail(function() {
                 // display error message
                 $('#addUrlName').val('');
@@ -128,7 +129,7 @@ ITEM;
 
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
             <div class="well sidebar-nav">
-                <ul class="nav">
+                <ul id="feeds_list" class="nav">
 
                 <!-- Add Feeds input bar
                     TODO: .ajax call to add feed -->
