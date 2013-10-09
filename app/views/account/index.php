@@ -23,11 +23,21 @@ TITLE;
     <script src="../bootstrap/assets/js/html5shiv.js"></script>
     <script src="../bootstrap/assets/js/respond.min.js"></script>
     <![endif]-->
+    <script src="../app/scripts/jquery-1.10.2.js"></script>
     <script type="text/javascript">
         function addFeed() {
             var url_name = document.getElementById('addUrlName').value;
+            // TODO: fix ajax call
 
-            alert(url_name);
+            $.ajax({
+                type: "POST",
+                url: "feed/add.php",
+                data: { url: url_name }
+            }).done(function( ) {
+                alert( "Data Saved" );
+            }).fail(function() {
+                alert("fail");
+            });
         }
     </script>
 </head>
@@ -106,23 +116,31 @@ ITEM;
 
                 <!-- Add Feeds input bar
                     TODO: .ajax call to add feed -->
-                <div class="input-group">
-                    <input id="addUrlName" type="text" class="form-control" placeholder="url">
-                    <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" onclick="addFeed()">Add</button>
-                    </span>
-                </div>
+                <form method="get" action="feed/add.php">
+                    <div class="input-group">
 
+                        <input id="addUrlName" name="url" type="text" class="form-control" placeholder="url">
+                        <span class="input-group-btn">
+                        <button type="submit" class="btn btn-default">Add</button>
+                        </span>
+
+                    </div>
+                </form>
                     <?php
                         // if user has feeds
                         if($count['feeds'] > 0) {
                     ?>
+                    <hr/>
                     <li>Feed List - <?php echo sizeof($feeds);?></li>
-                    <li><a><?php
+                    <?php
                             foreach($feeds as $feed){
-                                echo $feed->name;
+                                echo<<<ITEM
+                    <li><a>
+                        $feed->name
+                    </a</li>
+ITEM;
                             }
-                    ?></a></li>
+                    ?>
                     <?php
                         } else{
                             // if user doesnt have feeds
