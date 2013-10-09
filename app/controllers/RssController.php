@@ -16,15 +16,13 @@ class RssController extends BaseController {
 
         try{
             $xml = simplexml_load_file($url);
-            //return Response::json(array($xml));
 
             // parse feed
-              $feed = new Feed(array(
+            $feed = Feed::create(array(
                 'name' => $xml->channel->title,
                 'url' => $xml->channel->link,
                 'url_md5' => md5($xml->channel->link)
             ));
-            $feed->save();
 
             // connect feed to user
             Feeds_user::create(array(

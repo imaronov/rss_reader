@@ -34,15 +34,18 @@ TITLE;
                 url: "feed/add.php",
                 data: { url: url_name }
             }).done(function( data ) {
-                    alert(data['feed_name']);
+                // get data returned by ajax
+                var feedName = JSON.stringify(data['feed_name'][0]);
+
                 // display success message
                 $('#addUrlName').val('');
                 $('#url_add_alert').removeClass().addClass('alert alert-success');
                 $('#url_add_icon').removeClass().addClass('glyphicon glyphicon-thumbs-up');
                 $('#url_add_message').text('Feed added')
 
-                // TODO: add feed to list
-                $('feeds_list').append('<li><a>' + data['feed_name'] + '</a></li>');
+                // add feed to list on screen
+                feedName = feedName.substring(1, feedName.length - 1);
+                $('#feeds_list').append('<li><a>' + feedName + '</a></li>');
             }).fail(function() {
                 // display error message
                 $('#addUrlName').val('');
@@ -152,7 +155,6 @@ ITEM;
                         if($count['feeds'] > 0) {
                     ?>
                     <hr/>
-                    <li>Feed List - <?php echo sizeof($feeds);?></li>
                     <?php
                             foreach($feeds as $feed){
                                 echo<<<ITEM
