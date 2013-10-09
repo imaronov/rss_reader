@@ -50,11 +50,9 @@ class RssController extends BaseController {
                 ));
             }
 
-            return Redirect::to('/account');
 
         } catch(ErrorException $ee){
-            // if it is not a valid xml feed
-            return Redirect::to('/account');
+            App:abort('Invalid feed.');
         }
     }
 
