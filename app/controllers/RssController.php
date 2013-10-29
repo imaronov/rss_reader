@@ -10,10 +10,6 @@ class RssController extends BaseController {
         //gets url from user
         $url = Input::get('url');
 
-//        return Response::json(array(
-//            'feed_name' => "test"
-//        ));
-
         try{
             $xml = simplexml_load_file($url);
 
@@ -21,7 +17,7 @@ class RssController extends BaseController {
             $feed = Feed::create(array(
                 'name' => $xml->channel->title,
                 'url' => $xml->channel->link,
-                'url_md5' => md5($xml->channel->link)
+                'url_sha1' => md5($xml->channel->link)
             ));
 
             // connect feed to user
@@ -41,7 +37,7 @@ class RssController extends BaseController {
                     'feeds_id' => $feed->id,
                     'title' => $xml->channel->item[$i]->title,
                     'link' => $xml->channel->item[$i]->link,
-                    'link_md5' => md5($xml->channel->item[$i]->link),
+                    'link_sha1' => md5($xml->channel->item[$i]->link),
                     'description' => $xml->channel->item[$i]->description,
                     'pubDate' => date( "Y-m-d H:i:s", strtotime($xml->channel->item[$i]->pubDate))
                 ));
